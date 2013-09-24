@@ -270,7 +270,7 @@ class Project(models.Model):
     singfamhu  = models.IntegerField('Single Family Housing', blank=True, null=True, help_text='Number of units.')
     twnhsmmult = models.IntegerField('Townhouse and Small Multifamily', blank=True, null=True, help_text='Number of units.')
     lgmultifam = models.IntegerField('Large Multifamily', blank=True, null=True, help_text='Number of units.')
-    tothu      = models.FloatField('Total Housing', null=True, help_text='Number of units.')
+    tothu      = models.FloatField('Total Housing Units', null=True, help_text='Number of units.')
     gqpop      = models.IntegerField('Group Quarters', blank=True, null=True, help_text='Number of beds.')
     pctaffall  = models.FloatField('Affordable Units', blank=True, null=True, help_text='In percent.')
     clustosrd  = models.NullBooleanField('Cluster Subdivision', blank=True, null=True)
@@ -334,10 +334,17 @@ class Project(models.Model):
 
     # Calculated Fields
     est_employment = models.FloatField('MAPC Estimated Employment Potential', null=True)
+
+    # Predevelopment: Warren St
+    predev_budget      = models.FloatField('Predevelopment Budget: Total', null=True)
+    res_predev         = models.FloatField('Predevelopment Budget: Residential', null=True)
+    comm_predev        = models.FloatField('Predevelopment Budget: Commercial', null=True)
+    possible_developer = models.CharField('Possible Developer Name', blank=True, null=True, max_length=100)
+    
+
     
     class Meta:
         ordering = ['dd_id', ]
-
 
     def save(self, *args, **kwargs):
 
@@ -350,7 +357,7 @@ class Project(models.Model):
         try:
             self.taz = Taz.objects.get(geometry__contains=self.location)
         except Taz.DoesNotExist:
-            self.taz = None 
+            self.taz = None
 
         # set TOD Station
         try:

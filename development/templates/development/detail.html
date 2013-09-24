@@ -89,6 +89,13 @@
 
                         {% include "development/_property.html" with property=project.todstation|default:"-"|title label="Nearest Transit Station" %}
 
+                        {% if user.is_authenticated %}
+                            {% include "development/_property.html" with property=project.res_predev label="Predevelopment Budget (Residential)"%}
+                            {% include "development/_property.html" with property=project.comm_predev label="Predevelopment Budget (Commercial)"%}
+                            {% include "development/_property.html" with property=project.predev_budget label="Predevelopment Budget (Total)"%}
+                            {% include "development/_property.html" with property=project.possible_developer label="Possible Developer"%}
+                        {% endif %}
+
                         <div class="fieldcontainer">
                             <div class="fieldlabel"><a href="{{ project.walkscore.ws_link }}" class="walkscore"><img src="{{ WS_LOGO_URL }}" alt="What's your Walk Score?" width="120" height="19" border="0">{{ project.walkscore|default:"-" }}</a><a href="{{ WS_MORE_INFO_LINK }}" target="_blank"><img src="{{ WS_MORE_INFO_ICON }}" width="13" height="13"></a></div>
                         </div>
@@ -103,6 +110,7 @@
                         {# include "development/_property.html" with property=project.[NEW TXT] label="Other Development Team" #}
                         {# include "development/_property.html" with property=project.[NEW TXT] label="Leasing/Sales Agent" #}
                 </div>
+
                 <div class="span6">
                         <h3>Land Parcel Information</h3>
                         {% if project.parcel.fy != None %}
