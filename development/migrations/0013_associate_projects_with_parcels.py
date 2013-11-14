@@ -3,11 +3,14 @@ import datetime
 from south.db import db
 from south.v2 import DataMigration
 from django.db import models
+from development.models import Project
 
 class Migration(DataMigration):
 
     def forwards(self, orm):
-        for project in orm['development.Project'].objects.all(): project.save()
+        for project in Project.objects.all():
+            project.set_parcel()
+            project.save()
 
     def backwards(self, orm):
         db.execute("UPDATE development_project SET parcel_id = NULL")

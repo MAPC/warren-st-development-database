@@ -29,9 +29,14 @@ BING_API_KEY = get_env_variable("BING_API_KEY")
 WSAPIKEY     = get_env_variable("WSAPIKEY")
 
 
-DATABASES = {}
-DATABASES['default'] = dj_database_url.config()
-DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
+DATABASES = {
+'default': { 'NAME':'developmentdatabase',
+             'USER':'django',
+             'PASSWORD':'mapc.django',
+             'HOST':'localhost',
+             'ENGINE':'django.contrib.gis.db.backends.postgis'
+           }
+}
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
