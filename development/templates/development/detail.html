@@ -124,7 +124,7 @@
                 </div>
 
                 <div class="span6">
-                    {% if user.is_authenticated %}
+                    {% if is_trusted or is_municipal %}
                         <h3>Predevelopment</h3>
                             {% include "development/_property.html" with property=project.res_predev|intcomma|currency label="Predevelopment Budget (Residential)"%}
                             {% include "development/_property.html" with property=project.comm_predev|intcomma|currency label="Predevelopment Budget (Commercial)"%}
