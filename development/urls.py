@@ -11,4 +11,5 @@ urlpatterns = patterns('development.views',
     url('^detail/(?P<dd_id>\d+)/$', 'detail', name='detail'),
     url('^update/(?P<dd_id>\d+)/$', 'update', name='update'),
     url('^add/', 'add', name='add'),
+    url('^request_trust/', 'request_trust', name='request_trust'),
 )

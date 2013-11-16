@@ -33,6 +33,17 @@
               <dt>{% trans "Location" %}</dt>
               <dd>{{ profile.location }}</dd>
             {% endif %}
+
+            <br/>
+            <center>
+              {% if not is_municipal %}
+                {% if not is_trusted %}
+                  <dd><a href="{% url request_trust %}" class="btn btn-primary">{% trans "Request Editor Status" %}</a></dd>
+                  <small>Editor status means your edits to projects will be <br/>immediately applied, without moderation.</small>
+                {% endif %}
+              {% endif %}
+            </center>
+            
           {% endblock %}
         </dl>
       {% endblock %}

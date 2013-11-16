@@ -2,7 +2,7 @@ from django.shortcuts import render_to_response, redirect
 from django.core.mail import send_mail
 from django.template  import RequestContext, Context
 from django.template.loader import get_template
-from django.http      import Http404, HttpResponse
+from django.http      import Http404, HttpResponse, HttpResponseRedirect
 from django.contrib                 import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.gis.geos        import GEOSGeometry
@@ -228,3 +228,24 @@ def update(request, dd_id):
     return render_to_response('development/update.html', locals(), context_instance=RequestContext(request))
 
 
+
+
+def request_trust(request):
+    send_trust_request(request.user, "mcloyd@mapc.org")
+    messages.add_message(request, messages.INFO, 'You requested Editor status. An administrator will review your request.')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+def send_trust_request(user, recipient):
+    email_link = "<a href='mailto:%s'>%s</a>" % (user.email, user.email)
+
+    body = "%s %s (%s) would like Editor (Trusted User) status.<br/>" % (user.first_name, user.last_name, user.username)
+    body = body + "Approve the request by adding %s to the Trusted Users group in the admin area.<br/>" % (user.username)
+    body = body + "Decline the request by sending %s an email at %s." % (user.first_name, email_link)
+
+    send_mail("Warren St Development Database: Trusted User status request",
+              body,
+              recipient,
+              ['mcloyd@mapc.org'],
+              fail_silently=False)
+###

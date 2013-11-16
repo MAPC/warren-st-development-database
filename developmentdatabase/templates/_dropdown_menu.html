@@ -10,7 +10,7 @@
         <li><a href='{% url userena_email_change user.username %}'>{% trans "Change email" %}</a></li>
         {% if is_municipal %}
             <li class="divider"></li>
-            <li><a href='/moderate/{{ user.profile.municipality.name.lower }}'>Moderate {{ user.profile.municipality.name }}</a></li>
+            <li><a href='/moderate/{{ user.profile.municipality.name.lower }}'>{% trans "Moderate" %} {{ user.profile.municipality.name }}</a></li>
         {% endif %}
         <li class="divider"></li>
         <li><a href="{% url userena_signout %}">Log Out</a></li>
