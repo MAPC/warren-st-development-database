@@ -8,6 +8,10 @@ def percentage(value):
         return '{0:.0%}'.format(value)
 
 @register.filter
+def integer(value):
+    return int(value)
+
+@register.filter
 def currency(value):
     if value != None and value != '':
         return '$ %s' % (value)

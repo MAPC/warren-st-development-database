@@ -126,9 +126,9 @@
                 <div class="span6">
                     {% if is_trusted or is_municipal %}
                         <h3>Predevelopment</h3>
-                            {% include "development/_property.html" with property=project.res_predev|intcomma|currency label="Predevelopment Budget (Residential)"%}
-                            {% include "development/_property.html" with property=project.comm_predev|intcomma|currency label="Predevelopment Budget (Commercial)"%}
-                            {% include "development/_property.html" with property=project.predev_budget|intcomma|currency label="Predevelopment Budget (Total)"%}
+                            {% include "development/_property.html" with property=project.res_predev|integer|intcomma|currency label="Predevelopment Budget (Residential)" %}
+                            {% include "development/_property.html" with property=project.comm_predev|integer|intcomma|currency label="Predevelopment Budget (Commercial)" %}
+                            {% include "development/_property.html" with property=project.predev_budget|integer|intcomma|currency label="Predevelopment Budget (Total)" %}
                             {% include "development/_property.html" with property=project.possible_developer label="Possible Developer"%}
                     {% endif %}
                 </div>
